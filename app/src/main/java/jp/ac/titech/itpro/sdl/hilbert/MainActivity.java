@@ -1,14 +1,16 @@
 package jp.ac.titech.itpro.sdl.hilbert;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import static jp.ac.titech.itpro.sdl.hilbert.HilbertView.MAX_ORDER;
+import static jp.ac.titech.itpro.sdl.hilbert.HilbertView.MIN_ORDER;
+
 public class MainActivity extends AppCompatActivity {
 
-    private final static int MAX_ORDER = 9;
     private int order = 1;
 
     private final static String KEY_ORDER = "order";
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         decButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                assertTrue(order > 1, "A room to decrement order should exist");
+                assertTrue(order > MIN_ORDER, "A room to decrement order should exist");
                 order--;
                 display();
             }
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     private void display() {
         orderView.setText(getString(R.string.order_view_format, order));
         hilbertView.setOrder(order);
-        decButton.setEnabled(order > 1);
+        decButton.setEnabled(order > MIN_ORDER);
         incButton.setEnabled(order < MAX_ORDER);
     }
 
